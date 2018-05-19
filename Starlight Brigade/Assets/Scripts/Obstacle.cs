@@ -36,7 +36,7 @@ public class Obstacle : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
+        transform.position -= new Vector3(0, 0.33f, 0) * Time.deltaTime * speed;
         if(Stroid)
         {
             transform.Rotate(new Vector3(0, 0, transform.rotation.z + randZ));

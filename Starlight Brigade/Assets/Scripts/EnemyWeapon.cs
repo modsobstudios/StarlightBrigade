@@ -2,30 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class EnemyWeapon : MonoBehaviour
 {
-
     public GameObject projectile;
-    float fireRate = 1.5f;
+    float fireRate = 6.0f;
     float counter;
-
-
     // Use this for initialization
     void Start()
     {
-        counter = fireRate;
+
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0) && counter >= fireRate)
+        if (transform.parent.gameObject.GetComponent<SpriteRenderer>().isVisible && counter >= fireRate)
         {
             counter = 0;
-            GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
-            proj.tag = "PlayerProjectile";
+            GameObject proj = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+            proj.tag = "EnemyProjectile";
         }
-
         if (counter <= fireRate + 0.3f)
             counter += 0.1f;
     }

@@ -13,17 +13,24 @@ public class PlayerShip : MonoBehaviour
     int nukes;
     int maxNukes;
     SpriteRenderer sr;
-    Sprite[] splode;
+    Sprite[] splode, ship;
     bool asplode = false;
     int splodeCt = 0;
+    int shipCt = 0;
+    int animCt = 0;
 
     // Use this for initialization
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
+        ship = Resources.LoadAll<Sprite>("PlayerShip");
     }
 
+    private void Update()
+    {
+
+    }
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -31,6 +38,18 @@ public class PlayerShip : MonoBehaviour
             asplode = true;
         if (asplode)
             esplode();
+        else
+        {
+            animCt++;
+            if (animCt % 5 == 0)
+            {
+                animCt = 0;
+                sr.sprite = ship[shipCt];
+                shipCt++;
+                if (shipCt == ship.Length)
+                    shipCt = 0;
+            }
+        }
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -71,6 +90,8 @@ public class PlayerShip : MonoBehaviour
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
+        {
             Destroy(this.gameObject);
+        }
     }
 }

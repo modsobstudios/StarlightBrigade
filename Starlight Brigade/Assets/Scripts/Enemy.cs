@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     Weapon weapon;
     public Sprite[] splode;
     bool asplode = false;
+    bool visible = false;
     int splodeCt = 0;
     SpriteRenderer sr;
     PlayerShip player;
@@ -27,6 +28,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(player == null)
+            player = GameObject.Find("Player").GetComponent<PlayerShip>();
+
         if (health <= 0.0f)
         {
             asplode = true;
@@ -71,6 +75,18 @@ public class Enemy : MonoBehaviour
 
     void move()
     {
-        transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 0), 0) * Time.deltaTime * 10;
+        transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
+    }
+
+    private void OnBecameVisible()
+    {
+        visible = true;
+    }
+
+    private void OnBecameInvisible()
+    {
+        if (visible)
+            Destroy(this.gameObject);
     }
 }
+
