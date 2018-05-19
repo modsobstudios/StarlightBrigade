@@ -16,18 +16,31 @@ public class Obstacle : MonoBehaviour
     private Sprite[] splode;
     private int splodeCt = 0;
 
+    private float randZ;
+
+    public bool Stroid = false;
+
     // Use this for initialization
     void Start()
     {
         player = GameObject.Find("Player").GetComponent<PlayerShip>();
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
+
+        if(Stroid)
+        {
+            randZ = Random.Range(-5, 5);
+        }
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
         transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * speed;
+        if(Stroid)
+        {
+            transform.Rotate(new Vector3(0, 0, transform.rotation.z + randZ));
+        }
 
         if (health <= 0)
         {
