@@ -8,7 +8,8 @@ public class Projectile : MonoBehaviour
     Vector2 position;
     Vector2 area;
     float speed;
-    float damage;
+    float damage = 10.0f;
+    int points;
 
     // Use this for initialization
     void Start()
@@ -25,5 +26,10 @@ public class Projectile : MonoBehaviour
     void OnBecameInvisible()
     {
         Destroy(gameObject);
+    }
+
+    public float getDamage()
+    {
+        return damage;
     }
 }

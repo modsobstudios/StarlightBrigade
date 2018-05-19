@@ -6,7 +6,7 @@ public class Enemy : MonoBehaviour
 {
 
     Vector2 position;
-    float health;
+    float health = 10.0f;
     float speed;
     int points;
     Weapon weapon;
@@ -14,17 +14,25 @@ public class Enemy : MonoBehaviour
     bool asplode = false;
     int splodeCt = 0;
     SpriteRenderer sr;
+    PlayerShip player;
 
     // Use this for initialization
     void Start()
     {
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
+        player = GameObject.Find("Player").GetComponent<PlayerShip>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (health <= 0.0f)
+        {
+            asplode = true;
+            sr.color = Color.white;
+            player.awardPoints(points);
+        }
         if (asplode)
             esplode();
     }
@@ -34,13 +42,13 @@ public class Enemy : MonoBehaviour
         if(collision.transform.tag == "PlayerProjectile")
         {
             Destroy(collision.gameObject);
-            asplode = true;
-            sr.color = Color.white;
+            takeDamage(collision.gameObject.GetComponent<Projectile>().getDamage());
+
         }
         if(collision.transform.tag == "PlayerShip")
         {
-            asplode = true;
-            sr.color = Color.white;
+            player.takeDamage(health);
+            takeDamage(health);
         }
     }
 
@@ -50,5 +58,10 @@ public class Enemy : MonoBehaviour
         splodeCt++;
         if (splodeCt == splode.Length)
             Destroy(this.gameObject);
+    }
+
+    public void takeDamage(float _hp)
+    {
+        health -= _hp;
     }
 }

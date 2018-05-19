@@ -5,23 +5,32 @@ using UnityEngine;
 public class PlayerShip : MonoBehaviour
 {
 
-    float health;
+    float health = 10.0f;
     int lives;
     Weapon weapon;
     float speed;
     int points;
     int nukes;
     int maxNukes;
+    SpriteRenderer sr;
+    Sprite[] splode;
+    bool asplode = false;
+    int splodeCt = 0;
 
     // Use this for initialization
     void Start()
     {
-
+        sr = GetComponent<SpriteRenderer>();
+        splode = Resources.LoadAll<Sprite>("splode");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (health <= 0)
+            asplode = true;
+        if (asplode)
+            esplode();
 
         if (Input.GetKey(KeyCode.W))
         {
@@ -39,5 +48,29 @@ public class PlayerShip : MonoBehaviour
         {
             transform.position += new Vector3(1, 0, 0) * Time.deltaTime * 10;
         }
+    }
+
+    public void awardPoints(int _p)
+    {
+        points += _p;
+    }
+
+    public int readPoints()
+    {
+        return points;
+    }
+
+    public void takeDamage(float _hp)
+    {
+        Debug.Log("Taking damage!");
+        health -= _hp;
+    }
+
+    private void esplode()
+    {
+        sr.sprite = splode[splodeCt];
+        splodeCt++;
+        if (splodeCt == splode.Length)
+            Destroy(this.gameObject);
     }
 }
