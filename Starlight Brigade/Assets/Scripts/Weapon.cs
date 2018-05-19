@@ -5,19 +5,30 @@ using UnityEngine;
 public class Weapon : MonoBehaviour
 {
 
-    Projectile projectile;
-    float fireRate;
+    public GameObject projectile;
+    float fireRate = 1.5f;
+    float counter;
 
 
     // Use this for initialization
     void Start()
     {
-
+        counter = fireRate;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-
+        if(Input.GetKey(KeyCode.Mouse0) && counter >= fireRate && transform.parent.tag == "PlayerShip")
+        {
+            counter = 0;
+            GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
+            if (transform.parent.tag == "EnemyShip")
+                proj.tag = "EnemyProjectile";
+            else
+                proj.tag = "PlayerProjectile";
+        }
+        if (counter <= fireRate + 0.3f)
+            counter += 0.1f;
     }
 }

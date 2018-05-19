@@ -19,6 +19,11 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 10;
+    }
 
+    void OnBecameInvisible()
+    {
+        Destroy(gameObject);
     }
 }

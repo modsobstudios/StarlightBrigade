@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerShip : MonoBehaviour
 {
 
-    Vector2 position;
     float health;
     int lives;
     Weapon weapon;
@@ -24,5 +23,21 @@ public class PlayerShip : MonoBehaviour
     void FixedUpdate()
     {
 
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 10;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.position -= new Vector3(1, 0, 0) * Time.deltaTime * 10;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * 10;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.position += new Vector3(1, 0, 0) * Time.deltaTime * 10;
+        }
     }
 }
