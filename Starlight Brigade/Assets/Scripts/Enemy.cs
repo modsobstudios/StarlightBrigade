@@ -6,9 +6,9 @@ public class Enemy : MonoBehaviour
 {
 
     Vector2 position;
-    float health = 10.0f;
+    float health = 30.0f;
     float speed;
-    int points;
+    int points = 10;
     Weapon weapon;
     public Sprite[] splode;
     bool asplode = false;
@@ -31,10 +31,11 @@ public class Enemy : MonoBehaviour
         {
             asplode = true;
             sr.color = Color.white;
-            player.awardPoints(points);
         }
         if (asplode)
             esplode();
+
+        move();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,9 +44,10 @@ public class Enemy : MonoBehaviour
         {
             Destroy(collision.gameObject);
             takeDamage(collision.gameObject.GetComponent<Projectile>().getDamage());
-
+            if(health <= 0)
+                player.awardPoints(points);
         }
-        if(collision.transform.tag == "PlayerShip")
+        if (collision.transform.tag == "PlayerShip")
         {
             player.takeDamage(health);
             takeDamage(health);
@@ -57,11 +59,18 @@ public class Enemy : MonoBehaviour
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
+        {
             Destroy(this.gameObject);
+        }
     }
 
     public void takeDamage(float _hp)
     {
         health -= _hp;
+    }
+
+    void move()
+    {
+        transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-1.0f, 0), 0) * Time.deltaTime * 10;
     }
 }
