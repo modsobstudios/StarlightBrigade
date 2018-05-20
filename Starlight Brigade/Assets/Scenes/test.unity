@@ -338,7 +338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!82 &489501780
 AudioSource:
   m_ObjectHideFlags: 0
@@ -972,6 +972,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemy: {fileID: 1369921552357906, guid: 6d36f3d6312177a409f1a9fa6c9d8a7b, type: 2}
   asteroid: {fileID: 1827301145045702, guid: 4d28c42aa9fdb0241b9d931e195d9a36, type: 2}
+  pattern: 0
 --- !u!4 &1914005476
 Transform:
   m_ObjectHideFlags: 0
