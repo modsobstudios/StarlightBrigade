@@ -16,10 +16,10 @@ public class EnemyWeapon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (transform.parent.gameObject.GetComponent<SpriteRenderer>().isVisible && counter >= fireRate)
+        if (transform.parent.gameObject.GetComponent<SpriteRenderer>().isVisible && counter >= fireRate && !transform.parent.GetComponent<Enemy>().asplode)
         {
             counter = 0;
-            GameObject proj = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+            GameObject proj = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
             proj.tag = "EnemyProjectile";
         }
         if (counter <= fireRate + 0.3f)

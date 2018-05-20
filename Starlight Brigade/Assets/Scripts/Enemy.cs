@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     int points = 10;
     Weapon weapon;
     public Sprite[] splode, ship;
-    bool asplode = false;
+    public bool asplode = false;
     bool visible = false;
     int splodeCt = 0;
     int shipCt = 0;
@@ -71,10 +71,15 @@ public class Enemy : MonoBehaviour
             player.takeDamage(health);
             takeDamage(health);
         }
+        if(collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
+        {
+            takeDamage(health);
+        }
     }
 
     private void esplode()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
@@ -90,7 +95,7 @@ public class Enemy : MonoBehaviour
 
     void move()
     {
-        transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
+        transform.position += new Vector3(0, Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
     }
 
     private void OnBecameVisible()

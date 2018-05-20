@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
     private float speed = 5;
     [SerializeField]
     private float health;
-    private int points;
+    private int points = 5;
     private PlayerShip player;
     private SpriteRenderer sr;
     private Sprite[] splode;
@@ -50,6 +50,8 @@ public class Obstacle : MonoBehaviour
 
     private void die()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
+
         player.awardPoints(points);
         sr.sprite = splode[splodeCt];
         splodeCt++;

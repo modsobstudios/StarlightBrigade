@@ -8,6 +8,7 @@ TagManager:
   - PlayerProjectile
   - EnemyShip
   - EnemyProjectile
+  - PlayerLaser
   layers:
   - Default
   - TransparentFX
