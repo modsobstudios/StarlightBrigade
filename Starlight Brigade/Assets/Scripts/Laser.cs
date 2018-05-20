@@ -9,7 +9,7 @@ public class Laser : Weapon
     void Start()
     {
         counter = fireRate = 0.0f;
-        laser = Instantiate(projectile, transform.position + new Vector3(0, 5.0f, 1), Quaternion.identity);
+        laser = Instantiate(projectile, transform.position + new Vector3(0, 4.9f, 1), Quaternion.identity);
         laser.transform.parent = transform;
         laser.transform.tag = "PlayerLaser";
         laser.GetComponent<Collider2D>().enabled = false;

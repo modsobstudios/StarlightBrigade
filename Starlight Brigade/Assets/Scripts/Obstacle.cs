@@ -73,6 +73,7 @@ public class Obstacle : MonoBehaviour
         if (collision.transform.tag == "PlayerShip")
         {
             player.awardPoints(points);
+            player.takeDamage(5);
             sr.color = Color.white;
             health = 0;
         }

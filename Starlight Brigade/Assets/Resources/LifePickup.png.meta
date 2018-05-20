@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 821ee2b70c051be498279849465d2c89
-timeCreated: 1526842564
+guid: 38cc295c7536eaf478846133f5d9c024
+timeCreated: 1526850020
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TripleShotPickup_0
-    21300002: TripleShotPickup_1
-    21300004: TripleShotPickup_2
+    21300000: LifePickup_0
+    21300002: LifePickup_1
+    21300004: LifePickup_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -83,7 +83,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TripleShotPickup_0
+      name: LifePickup_0
       rect:
         serializedVersion: 2
         x: 2
@@ -97,7 +97,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TripleShotPickup_1
+      name: LifePickup_1
       rect:
         serializedVersion: 2
         x: 63
@@ -111,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TripleShotPickup_2
+      name: LifePickup_2
       rect:
         serializedVersion: 2
         x: 2
