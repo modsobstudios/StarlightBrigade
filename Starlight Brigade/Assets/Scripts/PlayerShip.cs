@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 public class PlayerShip : MonoBehaviour
 {
 
-    float health = 10.0f;
+    float health = 100.0f;
+    float maxHealth = 100.0f;
     int lives;
     public GameObject[] weapons;
     float speed;
@@ -20,6 +21,32 @@ public class PlayerShip : MonoBehaviour
     int shipCt = 0;
     int animCt = 0;
     GameObject currWeapon;
+
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+
+        set
+        {
+            health = value;
+        }
+    }
+
+    public float MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+
+        set
+        {
+            maxHealth = value;
+        }
+    }
 
     // Use this for initialization
     void Start()

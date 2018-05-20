@@ -23,7 +23,7 @@ public class MinigunBullet : Projectile
         Destroy(gameObject);
     }
 
-    public float getDamage()
+    new public float getDamage()
     {
         return damage;
     }

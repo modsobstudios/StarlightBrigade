@@ -5,12 +5,6 @@ using UnityEngine;
 public class LaserBeam : Projectile {
 
 
-    private SpriteRenderer sr;
-    private Sprite[] bullet;
-    private int bulletCt = 0;
-    private int animCt = 0;
-
-
     // Use this for initialization
     void Start ()
     {

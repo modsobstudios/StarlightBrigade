@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(player == null)
+        if (player == null)
             player = GameObject.Find("Player").GetComponent<PlayerShip>();
 
         if (health <= 0.0f)
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         else
         {
             animCt++;
-            if(animCt % 5 == 0)
+            if (animCt % 5 == 0)
             {
                 animCt = 0;
                 sr.sprite = ship[shipCt];
@@ -59,11 +59,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "PlayerProjectile")
+        if (collision.transform.tag == "PlayerProjectile")
         {
             Destroy(collision.gameObject);
             takeDamage(collision.gameObject.GetComponent<Projectile>().getDamage());
-            if(health <= 0)
+            if (health <= 0)
                 player.awardPoints(points);
         }
         if (collision.transform.tag == "PlayerShip")
@@ -71,7 +71,7 @@ public class Enemy : MonoBehaviour
             player.takeDamage(health);
             takeDamage(health);
         }
-        if(collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
+        if (collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
         {
             takeDamage(health);
         }

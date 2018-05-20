@@ -52,7 +52,6 @@ public class Obstacle : MonoBehaviour
     {
         GetComponent<BoxCollider2D>().enabled = false;
 
-        player.awardPoints(points);
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
@@ -68,11 +67,14 @@ public class Obstacle : MonoBehaviour
             Destroy(collision.gameObject);
             health -= collision.gameObject.GetComponent<Projectile>().getDamage();
             sr.color = Color.white;
+            if(health <= 0)
+                player.awardPoints(points);
         }
-        if(collision.transform.tag == "PlayerShip")
+        if (collision.transform.tag == "PlayerShip")
         {
+            player.awardPoints(points);
             sr.color = Color.white;
-            die();
+            health = 0;
         }
     }
 }

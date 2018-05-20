@@ -5,15 +5,12 @@ using UnityEngine;
 public class Projectile : MonoBehaviour
 {
 
-    Vector2 area;
-    float speed;
     protected float damage = 10.0f;
-    int points;
 
-    private SpriteRenderer sr;
-    private Sprite[] bullet;
-    private int bulletCt = 0;
-    private int animCt = 0;
+    protected SpriteRenderer sr;
+    protected Sprite[] bullet;
+    protected int bulletCt = 0;
+    protected int animCt = 0;
 
     // Use this for initialization
     void Start()
@@ -39,7 +36,8 @@ public class Projectile : MonoBehaviour
 
     void OnBecameInvisible()
     {
-        Destroy(gameObject);
+        if(transform.tag != "PlayerLaser")
+            Destroy(gameObject);
     }
 
     public float getDamage()
