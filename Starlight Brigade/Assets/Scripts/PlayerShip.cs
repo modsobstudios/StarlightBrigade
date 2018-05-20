@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerShip : MonoBehaviour
 {
@@ -51,19 +52,19 @@ public class PlayerShip : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetKey(KeyCode.W) && !asplode)
         {
             transform.position += new Vector3(0, 1, 0) * Time.deltaTime * 10;
         }
-        if (Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A) && !asplode)
         {
             transform.position -= new Vector3(1, 0, 0) * Time.deltaTime * 10;
         }
-        if (Input.GetKey(KeyCode.S))
+        if (Input.GetKey(KeyCode.S) && !asplode)
         {
             transform.position -= new Vector3(0, 1, 0) * Time.deltaTime * 10;
         }
-        if (Input.GetKey(KeyCode.D))
+        if (Input.GetKey(KeyCode.D) && !asplode)
         {
             transform.position += new Vector3(1, 0, 0) * Time.deltaTime * 10;
         }
@@ -91,7 +92,7 @@ public class PlayerShip : MonoBehaviour
         splodeCt++;
         if (splodeCt == splode.Length)
         {
-            Destroy(this.gameObject);
+            SceneManager.LoadScene("gameOver");
         }
     }
 }

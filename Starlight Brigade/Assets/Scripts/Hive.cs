@@ -20,18 +20,18 @@ public class Hive : MonoBehaviour
     void FixedUpdate()
     {
         counter += 0.1f;
-        if(counter >= spawnRate)
+        if (counter >= spawnRate)
         {
-            switch(Random.Range(0, 2))
+            switch (Random.Range(0, 2))
             {
                 case 0:
                 {
-            Instantiate(enemy, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(enemy, transform.position, Quaternion.Euler(new Vector3(0, 0, 180)));
                     break;
                 }
                 case 1:
                 {
-                    Instantiate(asteroid, new Vector3(Random.Range(-worldScreenWidth/2, worldScreenWidth/2), transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(asteroid, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, 180)));
                     break;
                 }
             }
