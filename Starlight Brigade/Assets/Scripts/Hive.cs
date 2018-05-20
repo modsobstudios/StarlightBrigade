@@ -26,7 +26,7 @@ public class Hive : MonoBehaviour
             {
                 case 0:
                 {
-                    Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, 180)));
+                    Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
                     break;
                 }
                 case 1:

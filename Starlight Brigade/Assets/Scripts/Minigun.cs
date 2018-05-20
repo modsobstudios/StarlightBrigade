@@ -5,10 +5,12 @@ using UnityEngine;
 public class Minigun : Weapon
 {
 
+    bool flip = false;
+
     // Use this for initialization
     void Start()
     {
-        counter = fireRate = 0.5f;
+        counter = fireRate = 0.25f;
     }
 
     // Update is called once per frame
@@ -16,13 +18,22 @@ public class Minigun : Weapon
     {
         if (Input.GetKey(KeyCode.Mouse0) && counter >= fireRate && !transform.parent.GetComponent<PlayerShip>().asplode)
         {
+            flip = !flip;
             counter = 0;
-            GameObject proj1 = Instantiate(projectile, transform.position - new Vector3(0.2f, 0, 0), Quaternion.identity);
-            GameObject proj2 = Instantiate(projectile, transform.position + new Vector3(0.2f, 0, 0), Quaternion.identity);
-            proj1.transform.position = new Vector3(proj1.transform.position.x, proj1.transform.position.y, -10);
-            proj2.transform.position = new Vector3(proj2.transform.position.x, proj2.transform.position.y, -10);
-            proj1.tag = "PlayerProjectile";
-            proj2.tag = "PlayerProjectile";
+            if (flip)
+            {
+                GameObject proj1 = Instantiate(projectile, transform.position - new Vector3(0.2f, 0, 0), Quaternion.identity);
+                proj1.transform.position = new Vector3(proj1.transform.position.x, proj1.transform.position.y, -10);
+                proj1.tag = "PlayerProjectile";
+
+            }
+            else
+            {
+
+                GameObject proj2 = Instantiate(projectile, transform.position + new Vector3(0.2f, 0, 0), Quaternion.identity);
+                proj2.transform.position = new Vector3(proj2.transform.position.x, proj2.transform.position.y, -10);
+                proj2.tag = "PlayerProjectile";
+            }
         }
 
         if (counter <= fireRate + 0.3f)

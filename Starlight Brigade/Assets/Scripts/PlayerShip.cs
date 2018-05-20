@@ -113,6 +113,15 @@ public class PlayerShip : MonoBehaviour
             switchWeapons(2);
         }
 
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            switchWeapons(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            switchWeapons(4);
+        }
     }
 
     public void awardPoints(int _p)
@@ -148,7 +157,7 @@ public class PlayerShip : MonoBehaviour
         {
             Destroy(currWeapon);
         }
-        currWeapon = Instantiate(weapons[weapon], transform.position - new Vector3(0,0,0), Quaternion.identity);
+        currWeapon = Instantiate(weapons[weapon], transform.position + new Vector3(0,0.26f,0), Quaternion.identity);
         currWeapon.transform.parent = this.transform;
         //currWeapon.transform.position = transform.parent.position;
     }

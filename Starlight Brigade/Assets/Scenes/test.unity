@@ -527,6 +527,8 @@ MonoBehaviour:
   - {fileID: 1400223759010718, guid: 9cad1dbd7d91d02459946d1c2fed835d, type: 2}
   - {fileID: 1776218189097594, guid: d88d60b11957a3d42bce9d0406595bf2, type: 2}
   - {fileID: 1500822773780698, guid: 12c413179b6d25649b8c9b61a4f89d16, type: 2}
+  - {fileID: 1536907234589274, guid: 877477cb66acec441877d50924a00870, type: 2}
+  - {fileID: 1768237885883780, guid: 3d4e5f7db946066428156bcaa035dc2f, type: 2}
   asplode: 0
 --- !u!212 &927090153
 SpriteRenderer:
