@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     int points = 10;
     Weapon weapon;
     public Sprite[] splode, ship;
-    bool asplode = false;
+    public bool asplode = false;
     bool visible = false;
     int splodeCt = 0;
     int shipCt = 0;
@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(player == null)
+        if (player == null)
             player = GameObject.Find("Player").GetComponent<PlayerShip>();
 
         if (health <= 0.0f)
@@ -44,7 +44,7 @@ public class Enemy : MonoBehaviour
         else
         {
             animCt++;
-            if(animCt % 5 == 0)
+            if (animCt % 5 == 0)
             {
                 animCt = 0;
                 sr.sprite = ship[shipCt];
@@ -59,11 +59,11 @@ public class Enemy : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.transform.tag == "PlayerProjectile")
+        if (collision.transform.tag == "PlayerProjectile")
         {
             Destroy(collision.gameObject);
             takeDamage(collision.gameObject.GetComponent<Projectile>().getDamage());
-            if(health <= 0)
+            if (health <= 0)
                 player.awardPoints(points);
         }
         if (collision.transform.tag == "PlayerShip")
@@ -71,10 +71,15 @@ public class Enemy : MonoBehaviour
             player.takeDamage(health);
             takeDamage(health);
         }
+        if (collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
+        {
+            takeDamage(health);
+        }
     }
 
     private void esplode()
     {
+        GetComponent<BoxCollider2D>().enabled = false;
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
@@ -90,7 +95,7 @@ public class Enemy : MonoBehaviour
 
     void move()
     {
-        transform.position += new Vector3(Random.Range(-1.0f, 1.0f), Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
+        transform.position += new Vector3(0, Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
     }
 
     private void OnBecameVisible()

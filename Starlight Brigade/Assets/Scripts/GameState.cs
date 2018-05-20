@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameState : MonoBehaviour
 {
 
-    int currentWave = 0;
+    //int currentWave = 0;
 
 
     // Use this for initialization

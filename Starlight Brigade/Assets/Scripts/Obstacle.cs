@@ -10,7 +10,7 @@ public class Obstacle : MonoBehaviour
     private float speed = 5;
     [SerializeField]
     private float health;
-    private int points;
+    private int points = 5;
     private PlayerShip player;
     private SpriteRenderer sr;
     private Sprite[] splode;
@@ -50,7 +50,8 @@ public class Obstacle : MonoBehaviour
 
     private void die()
     {
-        player.awardPoints(points);
+        GetComponent<BoxCollider2D>().enabled = false;
+
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
@@ -66,11 +67,14 @@ public class Obstacle : MonoBehaviour
             Destroy(collision.gameObject);
             health -= collision.gameObject.GetComponent<Projectile>().getDamage();
             sr.color = Color.white;
+            if(health <= 0)
+                player.awardPoints(points);
         }
-        if(collision.transform.tag == "PlayerShip")
+        if (collision.transform.tag == "PlayerShip")
         {
+            player.awardPoints(points);
             sr.color = Color.white;
-            die();
+            health = 0;
         }
     }
 }

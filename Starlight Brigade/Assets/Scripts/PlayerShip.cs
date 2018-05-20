@@ -6,19 +6,47 @@ using UnityEngine.SceneManagement;
 public class PlayerShip : MonoBehaviour
 {
 
-    float health = 10.0f;
+    float health = 100.0f;
+    float maxHealth = 100.0f;
     int lives;
-    Weapon weapon;
+    public GameObject[] weapons;
     float speed;
     int points;
     int nukes;
     int maxNukes;
     SpriteRenderer sr;
     Sprite[] splode, ship;
-    bool asplode = false;
+    public bool asplode = false;
     int splodeCt = 0;
     int shipCt = 0;
     int animCt = 0;
+    GameObject currWeapon;
+
+    public float Health
+    {
+        get
+        {
+            return health;
+        }
+
+        set
+        {
+            health = value;
+        }
+    }
+
+    public float MaxHealth
+    {
+        get
+        {
+            return maxHealth;
+        }
+
+        set
+        {
+            maxHealth = value;
+        }
+    }
 
     // Use this for initialization
     void Start()
@@ -26,6 +54,7 @@ public class PlayerShip : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
         ship = Resources.LoadAll<Sprite>("PlayerShip");
+        switchWeapons(0);
     }
 
     private void Update()
@@ -68,6 +97,31 @@ public class PlayerShip : MonoBehaviour
         {
             transform.position += new Vector3(1, 0, 0) * Time.deltaTime * 10;
         }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            switchWeapons(0);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            switchWeapons(1);
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            switchWeapons(2);
+        }
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            switchWeapons(3);
+        }
+
+        if (Input.GetKeyDown(KeyCode.F))
+        {
+            switchWeapons(4);
+        }
     }
 
     public void awardPoints(int _p)
@@ -94,5 +148,17 @@ public class PlayerShip : MonoBehaviour
         {
             SceneManager.LoadScene("gameOver");
         }
+    }
+
+    public void switchWeapons(int weapon)
+    {
+
+        if (currWeapon != null)
+        {
+            Destroy(currWeapon);
+        }
+        currWeapon = Instantiate(weapons[weapon], transform.position + new Vector3(0,0.26f,0), Quaternion.identity);
+        currWeapon.transform.parent = this.transform;
+        //currWeapon.transform.position = transform.parent.position;
     }
 }

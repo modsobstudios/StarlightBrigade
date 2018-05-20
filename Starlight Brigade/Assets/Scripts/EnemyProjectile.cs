@@ -8,17 +8,32 @@ public class EnemyProjectile : MonoBehaviour {
     float speed;
     float damage = 10.0f;
     int points;
-
+    Vector3 dir;
+    private SpriteRenderer sr;
+    private Sprite[] bullet;
+    private int bulletCt = 0;
+    private int animCt = 0;
     // Use this for initialization
     void Start()
     {
-
+        dir = new Vector3(Random.Range(-0.15f, 0.15f), -0.5f, 0);
+        sr = GetComponent<SpriteRenderer>();
+        bullet = Resources.LoadAll<Sprite>("EnemyBullet");
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.position += new Vector3(Random.Range(-0.5f, 0.5f), -0.5f, 0) * Time.deltaTime * 10;
+        animCt++;
+        if (animCt % 5 == 0)
+        {
+            animCt = 0;
+            sr.sprite = bullet[bulletCt];
+            bulletCt++;
+            if (bulletCt == bullet.Length)
+                bulletCt = 0;
+        }
+        transform.position +=  dir * Time.deltaTime * 10;
     }
 
     void OnBecameInvisible()

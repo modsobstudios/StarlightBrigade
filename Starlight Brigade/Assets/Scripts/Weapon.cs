@@ -19,7 +19,7 @@ public class Weapon : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0) && counter >= fireRate)
+        if(Input.GetKey(KeyCode.Mouse0) && counter >= fireRate && !transform.parent.GetComponent<PlayerShip>().asplode)
         {
             counter = 0;
             GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
