@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+    public enum Weapons { BLASTER, MINIGUN, LASER, SCATTER, TRIPLER, }
 public class PlayerShip : MonoBehaviour
 {
 
     float health = 100.0f;
     float maxHealth = 100.0f;
-    int lives;
+    int lives = 3;
     public GameObject[] weapons;
     float speed;
     int points;
@@ -21,6 +22,10 @@ public class PlayerShip : MonoBehaviour
     int shipCt = 0;
     int animCt = 0;
     GameObject currWeapon;
+    public bool respawning = false;
+    float respawnTransparency = 1.0f;
+    float respawnTimer = 20.0f;
+    bool respawnFlip = false;
 
     public float Health
     {
@@ -54,7 +59,7 @@ public class PlayerShip : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
         ship = Resources.LoadAll<Sprite>("PlayerShip");
-        switchWeapons(0);
+        switchWeapons(Weapons.BLASTER);
     }
 
     private void Update()
@@ -64,22 +69,10 @@ public class PlayerShip : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (health <= 0)
+        if (health <= 0 && !respawning)
             asplode = true;
-        if (asplode)
-            esplode();
-        else
-        {
-            animCt++;
-            if (animCt % 5 == 0)
-            {
-                animCt = 0;
-                sr.sprite = ship[shipCt];
-                shipCt++;
-                if (shipCt == ship.Length)
-                    shipCt = 0;
-            }
-        }
+
+        animateShip();
 
         if (Input.GetKey(KeyCode.W) && !asplode)
         {
@@ -100,27 +93,27 @@ public class PlayerShip : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Q))
         {
-            switchWeapons(0);
+            switchWeapons(Weapons.BLASTER);
         }
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            switchWeapons(1);
+            switchWeapons(Weapons.MINIGUN);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            switchWeapons(2);
+            switchWeapons(Weapons.LASER);
         }
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            switchWeapons(3);
+            switchWeapons(Weapons.SCATTER);
         }
 
         if (Input.GetKeyDown(KeyCode.F))
         {
-            switchWeapons(4);
+            switchWeapons(Weapons.TRIPLER);
         }
     }
 
@@ -140,25 +133,107 @@ public class PlayerShip : MonoBehaviour
         health -= _hp;
     }
 
+    private void animateShip()
+    {
+        if (asplode)
+            esplode();
+        else if (respawning)
+            respawnAnimation();
+        else
+        {
+            animCt++;
+            if (animCt % 5 == 0)
+            {
+                animCt = 0;
+                sr.sprite = ship[shipCt];
+                shipCt++;
+                if (shipCt == ship.Length)
+                    shipCt = 0;
+            }
+        }
+    }
+
+    private void respawnAnimation()
+    {
+        if (respawnFlip)
+        {
+            respawnTransparency -= 0.1f;
+            if (respawnTransparency <= 0.0f)
+            {
+                respawnFlip = false;
+                respawnTransparency = 0.0f;
+            }
+        }
+        else
+        {
+            respawnTransparency += 0.1f;
+            if (respawnTransparency >= 1.0f)
+            {
+                respawnFlip = true;
+                respawnTransparency = 1.0f;
+            }
+        }
+        sr.color = new Color(1, 1, 1, respawnTransparency);
+        respawnTimer -= 0.1f;
+        if (respawnTimer <= 0.0f)
+        {
+            sr.color = new Color(1, 1, 1, 1);
+            respawnTimer = 20.0f;
+            respawning = false;
+            GetComponent<Collider2D>().enabled = true;
+        }
+    }
+
     private void esplode()
     {
+        GetComponent<Collider2D>().enabled = false;
         sr.sprite = splode[splodeCt];
         splodeCt++;
         if (splodeCt == splode.Length)
         {
-            SceneManager.LoadScene("gameOver");
+            asplode = false;
+            respawn();
         }
     }
 
-    public void switchWeapons(int weapon)
+    public void switchWeapons(Weapons weapon)
     {
 
         if (currWeapon != null)
         {
             Destroy(currWeapon);
         }
-        currWeapon = Instantiate(weapons[weapon], transform.position + new Vector3(0,0.26f,0), Quaternion.identity);
+        currWeapon = Instantiate(weapons[(int)weapon], transform.position + new Vector3(0, 0.26f, 0), Quaternion.identity);
         currWeapon.transform.parent = this.transform;
         //currWeapon.transform.position = transform.parent.position;
+    }
+
+    public void respawn()
+    {
+        asplode = false;
+        splodeCt = 0;
+        if (lives > 0)
+        {
+            lives--;
+            health = maxHealth;
+            transform.position = new Vector3(0, 0, -10);
+            respawning = true;
+            sr.sprite = ship[0];
+            GetComponent<Collider2D>().enabled = false;
+        }
+        else
+        {
+            SceneManager.LoadScene("gameOver");
+        }
+    }
+
+    public void oneUp()
+    {
+        lives++;
+    }
+
+    public int getLives()
+    {
+        return lives;
     }
 }

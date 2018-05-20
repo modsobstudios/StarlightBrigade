@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 821ee2b70c051be498279849465d2c89
-timeCreated: 1526842564
+guid: c13995ca61c0bf84980ca0d28d806ea4
+timeCreated: 1526841853
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: TripleShotPickup_0
-    21300002: TripleShotPickup_1
-    21300004: TripleShotPickup_2
+    21300000: LazarrrPickup_0
+    21300002: LazarrrPickup_1
+    21300004: LazarrrPickup_2
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -83,7 +83,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: TripleShotPickup_0
+      name: LazarrrPickup_0
       rect:
         serializedVersion: 2
         x: 2
@@ -97,7 +97,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TripleShotPickup_1
+      name: LazarrrPickup_1
       rect:
         serializedVersion: 2
         x: 63
@@ -111,7 +111,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: TripleShotPickup_2
+      name: LazarrrPickup_2
       rect:
         serializedVersion: 2
         x: 2
