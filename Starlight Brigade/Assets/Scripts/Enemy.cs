@@ -10,10 +10,12 @@ public class Enemy : MonoBehaviour
     float speed;
     int points = 10;
     Weapon weapon;
-    public Sprite[] splode;
+    public Sprite[] splode, ship;
     bool asplode = false;
     bool visible = false;
     int splodeCt = 0;
+    int shipCt = 0;
+    int animCt = 0;
     SpriteRenderer sr;
     PlayerShip player;
 
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
     {
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
+        ship = Resources.LoadAll<Sprite>("EnemyShip1");
         player = GameObject.Find("Player").GetComponent<PlayerShip>();
     }
 
@@ -38,6 +41,18 @@ public class Enemy : MonoBehaviour
         }
         if (asplode)
             esplode();
+        else
+        {
+            animCt++;
+            if(animCt % 5 == 0)
+            {
+                animCt = 0;
+                sr.sprite = ship[shipCt];
+                shipCt++;
+                if (shipCt == ship.Length)
+                    shipCt = 0;
+            }
+        }
 
         move();
     }

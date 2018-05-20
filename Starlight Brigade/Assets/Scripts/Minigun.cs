@@ -2,24 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Weapon : MonoBehaviour
+public class Minigun : Weapon
 {
-
-    public GameObject projectile;
-    protected float fireRate = 1.5f;
-    protected float counter;
-
 
     // Use this for initialization
     void Start()
     {
-        counter = fireRate;
+        fireRate = 3.0f;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0) && counter >= fireRate)
+        if (Input.GetKey(KeyCode.Mouse0) && counter >= fireRate)
         {
             counter = 0;
             GameObject proj = Instantiate(projectile, transform.position, Quaternion.identity);
