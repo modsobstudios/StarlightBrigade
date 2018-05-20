@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Transform center;
+    public Vector3 axis = new Vector3 (0,0,1);
+    public float radius = 5.5f;
+    public float radiusSpeed = 0.5f;
+    public float rotationSpeed = 80.0f;
 
     Vector2 position;
-    float health = 30.0f;
+    public float health = 30.0f;
     float speed;
-    int points = 10;
+    public int points = 10;
     Weapon weapon;
     public Sprite[] splode, ship;
     public bool asplode = false;
@@ -16,6 +21,9 @@ public class Enemy : MonoBehaviour
     int splodeCt = 0;
     int shipCt = 0;
     int animCt = 0;
+    public bool Left = false;
+    public bool Side = false;
+    public bool Orbit = false;
     SpriteRenderer sr;
     PlayerShip player;
 
@@ -75,6 +83,16 @@ public class Enemy : MonoBehaviour
         {
             takeDamage(health);
         }
+        if (collision.transform.tag == "Bounds")
+        {
+            Left = !Left;
+        }
+        if(collision.transform.tag == "Orbit")
+        {
+            center = collision.transform;
+            Orbit = true;
+            Side = false;
+        }
     }
 
     private void esplode()
@@ -95,7 +113,27 @@ public class Enemy : MonoBehaviour
 
     void move()
     {
-        transform.position += new Vector3(0, Random.Range(-0.5f, 0), 0) * Time.deltaTime * 10;
+        if (Side)
+        {
+            if (Left)
+            {
+                transform.position += new Vector3(-0.2f, -0.05f, 0) * Time.deltaTime * 10;
+            }
+            else
+            {
+                transform.position += new Vector3(0.2f, -0.05f, 0) * Time.deltaTime * 10;
+            }
+        }
+        else if(Orbit)
+        {
+            transform.RotateAround(center.position, axis, rotationSpeed * Time.deltaTime);
+            var desiredPosition = (transform.position - center.position).normalized * radius + center.position;
+            transform.position = Vector3.MoveTowards(transform.position, desiredPosition, Time.deltaTime * radiusSpeed);
+        }
+        else
+        {
+            transform.position += new Vector3(0, -0.2f, 0) * Time.deltaTime * 10;
+        }
     }
 
     private void OnBecameVisible()

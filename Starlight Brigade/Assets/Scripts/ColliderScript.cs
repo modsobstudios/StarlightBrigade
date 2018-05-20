@@ -40,6 +40,7 @@ public class ColliderScript : MonoBehaviour {
         rightCollider.parent = transform;
         rightCollider.localScale = new Vector3(colliderDepth, screenSize.y * 2, colliderDepth);
         rightCollider.position = new Vector3(cameraPos.x + screenSize.x + (rightCollider.localScale.x * 0.5f), cameraPos.y, zPos);
+        rightCollider.gameObject.tag = "Bounds";
 
         leftCollider = new GameObject().transform;
         leftCollider.name = "LeftCollider";
@@ -47,10 +48,11 @@ public class ColliderScript : MonoBehaviour {
         leftCollider.parent = transform;
         leftCollider.localScale = new Vector3(colliderDepth, screenSize.y * 2, colliderDepth);
         leftCollider.position = new Vector3(cameraPos.x - screenSize.x - (leftCollider.localScale.x * 0.5f), cameraPos.y, zPos);
+        leftCollider.gameObject.tag = "Bounds";
     }
-	
-	// Update is called once per frame
-	void Update () {
+
+    // Update is called once per frame
+    void Update () {
 		
 	}
 }
