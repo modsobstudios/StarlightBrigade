@@ -32,8 +32,14 @@ public class BlasterPickup : Powerup {
     {
         if (collision.transform.tag == "PlayerShip")
         {
+
             collision.gameObject.GetComponent<PlayerShip>().switchWeapons(type);
+            AudioClip au = Resources.Load<AudioClip>("Audio/pickup");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
             Destroy(this.gameObject);
         }
+    }
+    private void OnDestroy()
+    {
     }
 }

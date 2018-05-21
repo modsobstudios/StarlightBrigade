@@ -31,7 +31,10 @@ public class LifePickup : Powerup {
         if(collision.transform.tag == "PlayerShip")
         {
             collision.gameObject.GetComponent<PlayerShip>().oneUp();
+            AudioClip au = Resources.Load<AudioClip>("Audio/pickup");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
             Destroy(this.gameObject);
         }
     }
+
 }

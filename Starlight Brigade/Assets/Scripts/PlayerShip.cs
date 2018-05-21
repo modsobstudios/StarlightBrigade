@@ -138,6 +138,11 @@ public class PlayerShip : MonoBehaviour
     {
         Debug.Log("Taking damage!");
         health -= _hp;
+        if(health <= 0 && !asplode)
+        {
+            AudioClip au = Resources.Load<AudioClip>("Audio/splode");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
+        }
     }
 
     private void animateShip()
@@ -193,6 +198,7 @@ public class PlayerShip : MonoBehaviour
 
     private void esplode()
     {
+
         GetComponent<Collider2D>().enabled = false;
         sr.sprite = splode[splodeCt];
         splodeCt++;

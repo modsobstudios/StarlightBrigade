@@ -5,7 +5,7 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     Transform center;
-    public Vector3 axis = new Vector3 (0,0,1);
+    public Vector3 axis = new Vector3(0, 0, 1);
     public float radius = 5.5f;
     public float radiusSpeed = 0.5f;
     public float rotationSpeed = 80.0f;
@@ -42,11 +42,17 @@ public class Enemy : MonoBehaviour
         if (player == null)
             player = GameObject.Find("Player").GetComponent<PlayerShip>();
 
+        if (health <= 0.0f && !asplode)
+        {
+            AudioClip au = Resources.Load<AudioClip>("Audio/splode");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
+        }
         if (health <= 0.0f)
         {
             asplode = true;
             sr.color = Color.white;
         }
+
         if (asplode)
             esplode();
         else
@@ -87,7 +93,7 @@ public class Enemy : MonoBehaviour
         {
             Left = !Left;
         }
-        if(collision.transform.tag == "Orbit")
+        if (collision.transform.tag == "Orbit")
         {
             center = collision.transform;
             Orbit = true;
@@ -97,6 +103,7 @@ public class Enemy : MonoBehaviour
 
     private void esplode()
     {
+
         GetComponent<BoxCollider2D>().enabled = false;
         sr.sprite = splode[splodeCt];
         splodeCt++;
@@ -124,7 +131,7 @@ public class Enemy : MonoBehaviour
                 transform.position += new Vector3(0.2f, -0.05f, 0) * Time.deltaTime * 10;
             }
         }
-        else if(Orbit)
+        else if (Orbit)
         {
             transform.RotateAround(center.position, axis, rotationSpeed * Time.deltaTime);
             var desiredPosition = (transform.position - center.position).normalized * radius + center.position;

@@ -32,8 +32,11 @@ public class HealthPickup : Powerup
         if(collision.transform.tag == "PlayerShip")
         {
             collision.gameObject.GetComponent<PlayerShip>().takeDamage(-25);
+            AudioClip au = Resources.Load<AudioClip>("Audio/pickup");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
             Destroy(this.gameObject);
         }
     }
+
 
 }
