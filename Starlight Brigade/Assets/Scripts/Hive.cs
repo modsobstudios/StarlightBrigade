@@ -29,7 +29,7 @@ public class Hive : MonoBehaviour
     {
         if(wave >= 10)
         {
-            GameObject e = Instantiate(boss, new Vector3(0, transform.position.y, transform.position.z), Quaternion.identity);
+            Instantiate(boss, new Vector3(0, transform.position.y, transform.position.z), Quaternion.identity);
             wave = 0;
         }
 
@@ -45,7 +45,7 @@ public class Hive : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    GameObject e = Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
+                                    Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
 
                                     break;
                                 }
@@ -165,7 +165,7 @@ public class Hive : MonoBehaviour
                         {
                             case 0:
                                 {
-                                    GameObject e = Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
+                                    Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
 
                                     break;
                                 }

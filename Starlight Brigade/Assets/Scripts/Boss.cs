@@ -19,8 +19,8 @@ public class Boss : MonoBehaviour
     public bool asplode = false;
     bool visible = false;
     int splodeCt = 0;
-    int shipCt = 0;
-    int animCt = 0;
+
+
     public bool Left = false;
     public bool Side = false;
     public bool Orbit = false;
