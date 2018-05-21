@@ -26,6 +26,8 @@ public class PlayerShip : MonoBehaviour
     float respawnTransparency = 1.0f;
     float respawnTimer = 20.0f;
     bool respawnFlip = false;
+    float weaponTimer = 0.0f;
+    bool timingWeapon = false;
 
     public float Health
     {
@@ -73,6 +75,11 @@ public class PlayerShip : MonoBehaviour
             asplode = true;
 
         animateShip();
+
+        if (timingWeapon)
+            weaponTimer -= 0.1f;
+        if (weaponTimer <= 0)
+            switchWeapons(Weapons.BLASTER);
 
         if (Input.GetKey(KeyCode.W) && !asplode)
         {
@@ -199,13 +206,52 @@ public class PlayerShip : MonoBehaviour
     public void switchWeapons(Weapons weapon)
     {
 
+        switch(weapon)
+        {
+            case Weapons.BLASTER:
+            {
+                timingWeapon = false;
+                weaponTimer = 1.0f;
+                break;
+            }
+
+            case Weapons.LASER:
+            {
+                timingWeapon = true;
+                weaponTimer = 30.0f;
+                break;
+            }
+
+            case Weapons.MINIGUN:
+            {
+                timingWeapon = true;
+                weaponTimer = 100.0f;
+                break;
+            }
+            case Weapons.TRIPLER:
+            {
+                timingWeapon = true;
+                weaponTimer = 60.0f;
+                break;
+            }
+            case Weapons.SCATTER:
+            {
+                timingWeapon = true;
+                weaponTimer = 50.0f;
+                break;
+            }
+            default:
+            {
+                break;
+            }
+        }
         if (currWeapon != null)
         {
             Destroy(currWeapon);
         }
         currWeapon = Instantiate(weapons[(int)weapon], transform.position + new Vector3(0, 0.26f, 0), Quaternion.identity);
         currWeapon.transform.parent = this.transform;
-        //currWeapon.transform.position = transform.parent.position;
+
     }
 
     public void respawn()

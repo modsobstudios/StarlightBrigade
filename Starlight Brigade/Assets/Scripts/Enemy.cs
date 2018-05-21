@@ -79,10 +79,10 @@ public class Enemy : MonoBehaviour
             player.takeDamage(health);
             takeDamage(health);
         }
-        if (collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
-        {
-            takeDamage(health);
-        }
+        //if (collision.transform.tag == "PlayerLaser" && GetComponent<SpriteRenderer>().isVisible)
+        //{
+        //    takeDamage(health);
+        //}
         if (collision.transform.tag == "Bounds")
         {
             Left = !Left;
