@@ -19,15 +19,26 @@ public class Laser : Weapon
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(Input.GetKey(KeyCode.Mouse0))
+        if (!ai)
         {
-            laser.GetComponent<Collider2D>().enabled = true;
-            laser.GetComponent<SpriteRenderer>().enabled = true;
+            if (Input.GetKey(KeyCode.Mouse0) || Input.GetKey(KeyCode.Space))
+            {
+                laser.GetComponent<Collider2D>().enabled = true;
+                laser.GetComponent<SpriteRenderer>().enabled = true;
+            }
+            else
+            {
+                laser.GetComponent<Collider2D>().enabled = false;
+                laser.GetComponent<SpriteRenderer>().enabled = false;
+            }
         }
         else
         {
-            laser.GetComponent<Collider2D>().enabled = false;
-            laser.GetComponent<SpriteRenderer>().enabled = false;
+            if (!transform.parent.GetComponent<FriendlyShip>().asplode)
+            {
+                laser.GetComponent<Collider2D>().enabled = true;
+                laser.GetComponent<SpriteRenderer>().enabled = true;
+            }
         }
     }
 }
