@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4251414500814316}
   - component: {fileID: 114847465250385770}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right2Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4232668282285880}
   - component: {fileID: 114486326767623370}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BlackHoleGun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4582634461412480}
   - component: {fileID: 114483074503497306}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left2Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4249581208098366}
   - component: {fileID: 114136670608911522}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Right1Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 61036836019184376}
   - component: {fileID: 114340981397219070}
   - component: {fileID: 50568029001258130}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -103,7 +103,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4003326499573676}
   - component: {fileID: 114567353365579190}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Left1Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -334,6 +334,7 @@ SpriteRenderer:
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -349,6 +350,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_StitchLightmapSeams: 0
   m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
