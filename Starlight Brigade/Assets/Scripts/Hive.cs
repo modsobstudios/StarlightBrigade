@@ -12,8 +12,8 @@ public class Hive : MonoBehaviour
     int numSpawned = 0;
     private float spawnRate1 = 1.5f;
     private float offset = -2.0f;
-    public GameObject enemy, asteroid;
-
+    public GameObject enemy, asteroid,boss;
+    private int wave = 0;
     [SerializeField]
     private int pattern = 0;
     // Use this for initialization
@@ -27,6 +27,11 @@ public class Hive : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if(wave >= 2)
+        {
+            GameObject e = Instantiate(boss, new Vector3(0, transform.position.y, transform.position.z), Quaternion.identity);
+            wave = 0;
+        }
 
         switch (pattern)
         {
@@ -61,6 +66,7 @@ public class Hive : MonoBehaviour
                     counter = 0;
                     //Choose new pattern
                     ChoosePattern();
+                    wave++;
                 }
                 break;
             case 1: // Pattern 1
@@ -85,6 +91,7 @@ public class Hive : MonoBehaviour
                     counter = 0;
                     //Choose new pattern
                     pattern = 0;
+                    wave++;
                 }
                 break;
             case 2: // Pattern 2
@@ -109,6 +116,7 @@ public class Hive : MonoBehaviour
                     counter = 0;
                     //Choose new pattern
                     pattern = 0;
+                    wave++;
                 }
 
 
@@ -134,7 +142,7 @@ public class Hive : MonoBehaviour
                         e1.GetComponent<Enemy>().points /= 2;
                         e1.GetComponent<SpriteRenderer>().color = Color.red;
 
-                        numSpawned++;
+                        numSpawned+=2;
                         counter = 0;
                     }
                 }
@@ -144,6 +152,41 @@ public class Hive : MonoBehaviour
                     counter = 0;
                     //Choose new pattern
                     pattern = 0;
+                    wave++;
+                }
+                break;
+            default:
+                counter += 0.1f;
+                if (numSpawned <= numEnemies)
+                {
+                    if (counter >= spawnRate)
+                    {
+                        switch (Random.Range(0, 2))
+                        {
+                            case 0:
+                                {
+                                    GameObject e = Instantiate(enemy, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.identity);
+
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    Instantiate(asteroid, new Vector3(Random.Range(-worldScreenWidth / 2, worldScreenWidth / 2), transform.position.y, transform.position.z), Quaternion.Euler(new Vector3(0, 0, 180)));
+
+                                    break;
+                                }
+                        }
+                        numSpawned++;
+                        counter = 0.0f;
+                    }
+                }
+                else
+                {
+                    numSpawned = 0;
+                    counter = 0;
+                    //Choose new pattern
+                    ChoosePattern();
+                    wave++;
                 }
                 break;
         }
@@ -151,7 +194,7 @@ public class Hive : MonoBehaviour
 
     private void ChoosePattern()
     {
-        pattern = Random.Range(0, 3);
+        pattern = Random.Range(0, 4);
     }
 
 }
