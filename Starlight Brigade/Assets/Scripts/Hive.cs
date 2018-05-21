@@ -27,7 +27,7 @@ public class Hive : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(wave >= 10)
+        if(wave >= 15)
         {
             Instantiate(boss, new Vector3(0, transform.position.y, transform.position.z), Quaternion.identity);
             wave = 0;

@@ -34,6 +34,7 @@ public class ColliderScript : MonoBehaviour {
         bottomCollider.parent = transform;
         bottomCollider.localScale = new Vector3(screenSize.x * 2, colliderDepth, colliderDepth);
         bottomCollider.position = new Vector3(cameraPos.x, cameraPos.y - screenSize.y - (bottomCollider.localScale.y * 0.5f), zPos);
+        bottomCollider.gameObject.layer = 10;
 
         rightCollider = new GameObject().transform;
         rightCollider.name = "RightCollider";
