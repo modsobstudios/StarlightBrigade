@@ -640,6 +640,7 @@ GameObject:
   - component: {fileID: 927090152}
   - component: {fileID: 927090151}
   - component: {fileID: 927090150}
+  - component: {fileID: 927090155}
   m_Layer: 0
   m_Name: Player
   m_TagString: PlayerShip
@@ -773,6 +774,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927090155
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 927090149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3188f80788704c4491ea479b1ff1f45, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ally: {fileID: 1736730671897376, guid: db3f22ff66d982b40b065d4743b07ed0, type: 2}
+  spawn: 0
 --- !u!1 &1012228746
 GameObject:
   m_ObjectHideFlags: 0
@@ -782,6 +796,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1012228747}
   - component: {fileID: 1012228748}
+  - component: {fileID: 1012228749}
   m_Layer: 0
   m_Name: PointMaster
   m_TagString: Untagged
@@ -813,6 +828,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 671093f28cdaecf4992864ee5c5f7d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1012228749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1012228746}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a1339dfb63e5aff4ea036f81efef79a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showScores: 0
 --- !u!1 &1028475694
 GameObject:
   m_ObjectHideFlags: 0

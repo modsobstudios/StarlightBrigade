@@ -43,4 +43,9 @@ public class PointMaster : MonoBehaviour
             hpBar.transform.localScale = new Vector3(hpRatio, 0.2f, 1);
         }
     }
+
+    public int getScore()
+    {
+        return player.readPoints();
+    }
 }

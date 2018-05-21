@@ -84,7 +84,6 @@ public class Obstacle : MonoBehaviour
         {
             Destroy(collision.gameObject);
             health -= collision.gameObject.GetComponent<Projectile>().getDamage();
-            sr.color = Color.white;
             if (health <= 0)
                 player.awardPoints(points);
         }

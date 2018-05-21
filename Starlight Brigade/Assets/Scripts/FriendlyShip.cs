@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FriendlyShip : MonoBehaviour {
+public class FriendlyShip : MonoBehaviour
+{
     public enum Weapons { BLASTER, MINIGUN, LASER, SCATTER, TRIPLER, }
 
     float health = 20.0f;
@@ -19,12 +20,29 @@ public class FriendlyShip : MonoBehaviour {
     GameObject currWeapon;
     float weaponTimer = 0.0f;
     bool timingWeapon = false;
+    int colorIndex = 0;
+    int nextColor = 1;
+    float colerp = 0.0f;
+
+    Color[] colArr = {  new Color(1.0f,0.5f,0.5f),
+        Color.white,
+                        new Color(1.0f, 0.8f, 0.5f),
+                        Color.white,
+                        new Color(1.0f, 1.0f, 0.5f),
+                        Color.white,
+                        new Color(0.5f, 1.0f, 0.5f),
+                        Color.white,
+                        new Color(0.5f, 0.5f, 1.0f),
+                        Color.white,
+                        new Color(0.8f, 0.5f, 1.0f),
+                        Color.white };
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         sr = GetComponent<SpriteRenderer>();
         splode = Resources.LoadAll<Sprite>("splode");
         ship = Resources.LoadAll<Sprite>("PlayerShip");
-        switch (Random.Range(0,5))
+        switch (Random.Range(0, 5))
         {
             case 0:
                 switchWeapons(Weapons.BLASTER);
@@ -45,54 +63,72 @@ public class FriendlyShip : MonoBehaviour {
                 switchWeapons(Weapons.BLASTER);
                 break;
         }
-        switch(Random.Range(0,9))
+        switch (Random.Range(0, 7))
         {
             case 0:
-                sr.color = Color.yellow;
+                sr.color = colArr[0];
+                colorIndex = 0;
                 break;
 
             case 1:
-                sr.color = Color.blue;
+                sr.color = colArr[1];
+                colorIndex = 1;
                 break;
 
             case 2:
-                sr.color = Color.cyan;
+                sr.color = colArr[2];
+                colorIndex = 2;
                 break;
 
             case 3:
-                sr.color = Color.gray;
+                sr.color = colArr[3];
+                colorIndex = 3;
                 break;
 
             case 4:
-                sr.color = Color.green;
+                sr.color = colArr[4];
+                colorIndex = 4;
                 break;
 
             case 5:
-                sr.color = Color.grey;
+                sr.color = colArr[5];
+                colorIndex = 5;
                 break;
 
             case 6:
-                sr.color = Color.magenta;
-                break;
-
-            case 7:
-                sr.color = Color.red;
-                break;
-
-            case 8:
-                sr.color = Color.white;
+                sr.color = colArr[6];
+                colorIndex = 6;
                 break;
 
             default:
-                sr.color = Color.cyan;
+                sr.color = colArr[0];
+                colorIndex = 0;
                 break;
         }
         Destroy(gameObject, 8);
     }
-	
-	// Update is called once per frame
-	void FixedUpdate () {
-            transform.position += new Vector3(0, .3f, 0) * Time.deltaTime * 10;
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        transform.position += new Vector3(0, .3f, 0) * Time.deltaTime * 10;
+        nextColor = colorIndex + 1;
+        if (nextColor == colArr.Length)
+            nextColor = 0;
+        if(sr.color != colArr[nextColor])
+        {
+            sr.color = Color.Lerp(colArr[colorIndex], colArr[nextColor], colerp);
+            colerp += 0.1f;
+        }
+        else
+        {
+            colerp = 0.0f;
+            colorIndex = Random.Range(0, colArr.Length);
+            if (colorIndex == colArr.Length)
+                colorIndex = 0;
+        }
+
+
     }
 
     public void switchWeapons(Weapons weapon)
@@ -108,47 +144,52 @@ public class FriendlyShip : MonoBehaviour {
         switch (weapon)
         {
             case Weapons.BLASTER:
-                {
-                    currWeapon.GetComponent<Weapon>().ai = true;
-                    timingWeapon = false;
-                    weaponTimer = 1.0f;
-                    break;
-                }
+            {
+                currWeapon.GetComponent<Weapon>().ai = true;
+                timingWeapon = false;
+                weaponTimer = 1.0f;
+                break;
+            }
 
             case Weapons.LASER:
-                {
-                    currWeapon.GetComponent<Minigun>().ai = true;
+            {
+                currWeapon.GetComponent<Minigun>().ai = true;
 
-                    timingWeapon = true;
-                    weaponTimer = 30.0f;
-                    break;
-                }
+                timingWeapon = true;
+                weaponTimer = 30.0f;
+                break;
+            }
 
             case Weapons.MINIGUN:
-                {
-                    currWeapon.GetComponent<Laser>().ai = true;
+            {
+                currWeapon.GetComponent<Laser>().ai = true;
 
-                    timingWeapon = true;
-                    weaponTimer = 100.0f;
-                    break;
-                }
+                timingWeapon = true;
+                weaponTimer = 100.0f;
+                break;
+            }
             case Weapons.TRIPLER:
-                {
-                    currWeapon.GetComponent<Tripler>().ai = true;
+            {
+                currWeapon.GetComponent<Tripler>().ai = true;
 
-                    timingWeapon = true;
-                    weaponTimer = 60.0f;
-                    break;
-                }
+                timingWeapon = true;
+                weaponTimer = 60.0f;
+                break;
+            }
             case Weapons.SCATTER:
-                {
-                    currWeapon.GetComponent<Scattergun>().ai = true;
-                    timingWeapon = true;
-                    weaponTimer = 50.0f;
-                    break;
-                }
+            {
+                currWeapon.GetComponent<Scattergun>().ai = true;
+                timingWeapon = true;
+                weaponTimer = 50.0f;
+                break;
+            }
         }
 
 
+    }
+
+    private void OnBecameInvisible()
+    {
+        Destroy(this.gameObject);
     }
 }

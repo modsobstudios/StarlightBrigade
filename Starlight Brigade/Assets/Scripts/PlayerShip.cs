@@ -122,6 +122,11 @@ public class PlayerShip : MonoBehaviour
         {
             switchWeapons(Weapons.TRIPLER);
         }
+
+        if(Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            GetComponent<StarlightBrigade>().SpawnBrigade();
+        }
     }
 
     public void awardPoints(int _p)
@@ -275,6 +280,8 @@ public class PlayerShip : MonoBehaviour
         }
         else
         {
+            GameObject.Find("PointMaster").GetComponent<PlayerPrefScript>().addScoreThenTruncate(GameObject.Find("PointMaster").GetComponent<PointMaster>().getScore());
+            GameObject.Find("PointMaster").GetComponent<PlayerPrefScript>().setScoresToPref();
             SceneManager.LoadScene("gameOver");
         }
     }
