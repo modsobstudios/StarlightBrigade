@@ -19,7 +19,8 @@ public class Scattergun : Weapon
         if (Input.GetKey(KeyCode.Mouse0) && counter >= fireRate && !transform.parent.GetComponent<PlayerShip>().asplode)
         {
             counter = 0;
-
+            AudioClip au = Resources.Load<AudioClip>("Audio/scatter");
+            GameObject.Find("SFX Source").GetComponent<AudioSource>().PlayOneShot(au);
             GameObject proj1 = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, -30));
             GameObject proj2 = Instantiate(projectile, transform.position, Quaternion.Euler(0, 0, -15));
             GameObject proj3 = Instantiate(projectile, transform.position, Quaternion.identity);

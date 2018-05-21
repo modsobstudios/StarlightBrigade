@@ -19,6 +19,8 @@ public class PointMaster : MonoBehaviour
         lifeText = GameObject.Find("Lives").GetComponent<Text>();
         player = GameObject.Find("Player").GetComponent<PlayerShip>();
         hpBar = GameObject.Find("HPBar").GetComponent<Image>();
+        AudioClip au = Resources.Load<AudioClip>("Audio/splode");
+        GameObject.Find("SFX Source").GetComponent<AudioSource>().Play(44100);
     }
 
     // Update is called once per frame

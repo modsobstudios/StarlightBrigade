@@ -11,6 +11,7 @@ public class Powerup : MonoBehaviour
     protected int animCt;
     protected Vector3 trajectory;
 
+
     protected void moveTo()
     {
         transform.position += trajectory * Time.deltaTime;
@@ -30,5 +31,9 @@ public class Powerup : MonoBehaviour
     void FixedUpdate()
     {
 
+    }
+
+    private void OnDestroy()
+    {
     }
 }

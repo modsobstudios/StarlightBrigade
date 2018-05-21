@@ -5,9 +5,11 @@ using UnityEngine;
 public class Laser : Weapon
 {
     GameObject laser;
+    AudioClip au;
     // Use this for initialization
     void Start()
     {
+        au = Resources.Load<AudioClip>("Audio/laser");
         counter = fireRate = 0.0f;
         laser = Instantiate(projectile, transform.position + new Vector3(0, 4.9f, 1), Quaternion.identity);
         laser.transform.parent = transform;
@@ -23,11 +25,13 @@ public class Laser : Weapon
         {
             laser.GetComponent<Collider2D>().enabled = true;
             laser.GetComponent<SpriteRenderer>().enabled = true;
+            laser.GetComponent<AudioSource>().PlayOneShot(au);
         }
         else
         {
             laser.GetComponent<Collider2D>().enabled = false;
             laser.GetComponent<SpriteRenderer>().enabled = false;
+            laser.GetComponent<AudioSource>().Pause();
         }
     }
 }
